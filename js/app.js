@@ -2,12 +2,51 @@
 
 document.addEventListener('DOMContentLoaded', () => {
    
-    populateSection();
-    
-  
+   // populateSection();
+   buildForm();
+   createListSpace();
 });
 
-// let aForm;
+let aForm;
+
+const buildForm = function() {
+    console.log("building a form")
+    const indexBody = document.querySelector('#formSection');
+    const aForm = document.createElement('form');
+    aForm.id='indexBodyForm';
+
+    const fromWrap=document.createElement('div');
+    fromWrap.id='wrapperForFormElements'
+
+    const takeName = document.createElement('label');
+    takeName.for='name';
+    takeName.innerHTML="Name "
+    const nameInput = document.createElement('input');
+    nameInput.type='text';
+    nameInput.id='enteredName';
+    nameInput.required='true'; //!! Seems like this will need to be fillded for submit form to work.
+    // <label for="title" class="primary">Title</label>
+    //       <input type="text" id="title" required/>
+    fromWrap.appendChild(takeName);
+    fromWrap.appendChild(nameInput);
+    aForm.appendChild(fromWrap);
+    indexBody.appendChild(aForm);
+    
+};
+
+const createListSpace = function() {
+    console.log("creating a space to print the list")
+    const listAllocator = document.querySelector('#listSection');
+    const unorderedList =  document.createElement('ul');
+    unorderedList.id="UnorderedList"
+    listAllocator.appendChild(unorderedList);
+};
+
+const addAListItem = function(event) {
+    console.log("trying to add to list")
+};
+
+
 
 const populateSection = function() {
     console.log("populate");
