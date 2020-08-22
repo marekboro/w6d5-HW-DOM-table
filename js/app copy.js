@@ -22,7 +22,7 @@ const buildForm = function () {
 
     const formItemName = document.createElement('div');
     const formItemEmail = document.createElement('div');
-
+    
     // //! N A M E Field/request
     const nameFieldLabel = document.createElement('label');
     nameFieldLabel.for = 'name';
@@ -33,7 +33,7 @@ const buildForm = function () {
     nameInput.required = 'true'; //!! Seems like this will need to be fillded for submit form to work.
     formItemName.appendChild(nameFieldLabel);
     formItemName.appendChild(nameInput);
-
+    
     //! EMAIL Field/request
     const emailFieldLabel = document.createElement('label');
     emailFieldLabel.for = 'email';
@@ -53,9 +53,9 @@ const buildForm = function () {
     submitFrom.id = "submitForm";
     submitFrom.value = "Add to List";
     submitFrom.type = "submit";
-
-
-
+    
+    
+   
 
 
     fromWrap.appendChild(formItemName);
@@ -106,10 +106,10 @@ const createControlSpace = function () {
 };
 let counter = 0;
 const addAListItems = function (event) {
-    addNameToList(event);
-    addEmailToList(event);
-    clearInputOptions();
-    counter += 1;
+    addNameToList(event)
+    addEmailToList(event)
+    clearInputOptions()
+    counter+=1;
 
 
 };
@@ -120,8 +120,9 @@ const addNameToList = function (event) {
     const list = document.querySelector('ul');
 
     const newListItem = document.createElement("li");
-    newListItem.id = `listItem${counter}`;
+
     const nameDiv = document.createElement('div');
+    nameDiv.id = `listDiv${counter}`;
     const nameTitle = document.createTextNode("Name: ");
 
     const nameTyped = document.createTextNode('h1');
@@ -135,22 +136,27 @@ const addNameToList = function (event) {
     list.appendChild(newListItem);
 }
 
-const addEmailToList = function (event) {  // !! WORKS
-    // console.log("trying to add email fields to list")   //* TO REMOVE
-
-    const currentListElement = document.getElementById(`listItem${counter}`);
-    const divForEmail = document.createElement('div');
+const addEmailToList = function(event) {
+    console.log("trying to add email fields to list")   //* TO REMOVE
+    
+    
+    
+    const list = document.querySelector('ul');
+    const newListItem = document.createElement("li");
+    const emailDiv = document.createElement('div');
+    emailDiv.id = "emailDivInList";
     const emailTitle = document.createTextNode("Email: ");
     const emailTyped = document.createTextNode('h1');
     emailTyped.textContent = event.target.enteredEmail.value;
 
-    divForEmail.appendChild(emailTitle);
-    divForEmail.appendChild(emailTyped);
-    currentListElement.appendChild(divForEmail);
+    emailDiv.appendChild(emailTitle);
+    emailDiv.appendChild(emailTyped);
+
+    newListItem.appendChild(emailDiv);
+
+    list.appendChild(newListItem);
 
 }
-
-
 
 
 
