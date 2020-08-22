@@ -20,8 +20,10 @@ const buildForm = function () {
     const fromWrap = document.createElement('div');
     fromWrap.id = 'wrapperForFormElements'
 
+    
     const formItemName = document.createElement('div');
     const formItemEmail = document.createElement('div');
+    const formItemFood = document.createElement('div');
 
     // //! N A M E Field/request
     const nameFieldLabel = document.createElement('label');
@@ -45,9 +47,17 @@ const buildForm = function () {
     formItemEmail.appendChild(emailFieldLabel);
     formItemEmail.appendChild(emailInput);
 
-
-
-
+    //! Fav FOOD
+    const foodFieldLabel = document.createElement('label');
+    foodFieldLabel.for = 'favouritefood';
+    foodFieldLabel.innerHTML = "Favourite Dish: ";
+    const foodInput = document.createElement('input');
+    foodInput.type = 'text';
+    foodInput.id = 'enteredFood';
+    foodInput.required = 'true'; 
+    formItemFood.appendChild(foodFieldLabel);
+    formItemFood.appendChild(foodInput);
+    
     // //! SUBMIT FORM
     const submitFrom = document.createElement('input');
     submitFrom.id = "submitForm";
@@ -60,6 +70,7 @@ const buildForm = function () {
 
     fromWrap.appendChild(formItemName);
     fromWrap.appendChild(formItemEmail);
+    fromWrap.appendChild(formItemFood);
 
 
     aForm.appendChild(fromWrap);
@@ -108,6 +119,7 @@ let counter = 0;
 const addAListItems = function (event) {
     addNameToList(event);
     addEmailToList(event);
+    addFavouriteFood(event);
     clearInputOptions();
     counter += 1;
 
@@ -147,6 +159,20 @@ const addEmailToList = function (event) {  // !! WORKS
     divForEmail.appendChild(emailTitle);
     divForEmail.appendChild(emailTyped);
     currentListElement.appendChild(divForEmail);
+
+}
+
+const addFavouriteFood = function (event) {  // !! WORKS
+
+    const currentListElement = document.getElementById(`listItem${counter}`);
+    const divForFood = document.createElement('div');
+    const FoodTitle = document.createTextNode("Favourite Dish: ");
+    const FoodTyped = document.createTextNode('h1');
+    FoodTyped.textContent = event.target.enteredFood.value;
+
+    divForFood.appendChild(FoodTitle);
+    divForFood.appendChild(FoodTyped);
+    currentListElement.appendChild(divForFood);
 
 }
 
