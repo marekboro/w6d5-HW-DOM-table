@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     createControlSpace();
     const addToList = document.querySelector('#indexBodyForm');
     addToList.addEventListener('submit', addAListItems);
+    
     const erase = document.getElementById(`clearList1`);
     erase.addEventListener('click', clearlistMethod1);
+
+    const undo = document.getElementById(`undoLast`);
+    undo.addEventListener('click', removeLastListItem);
 
 });
 
@@ -100,6 +104,13 @@ const createControlSpace = function () {
     ClarListButton1.id = "clearList1";
     ClarListButton1.innerHTML = "Erase List";
     controlAllocator.appendChild(ClarListButton1);
+    
+    const undoButton = document.createElement('button');
+    undoButton.id = "undoLast";
+    undoButton.innerHTML = "Undo";
+    controlAllocator.appendChild(undoButton);
+
+
 
 
     const DemoButton = document.createElement('button');
@@ -171,9 +182,6 @@ const addFavouriteFood = function (event) {  // !! WORKS
 }
 
 
-
-
-
 const clearInputOptions = function () {
     document.getElementById('enteredName').value = "";
     document.getElementById('enteredEmail').value = "";
@@ -182,10 +190,24 @@ const clearInputOptions = function () {
 
 
 
-const clearlistMethod1 = function(event) {
+const clearlistMethod1 = function() {
     console.log("ups")
     const list = document.querySelector('#UnorderedList');
     list.innerHTML = "";  /// NEW
+
+};
+
+
+const removeLastListItem = function() {
+    console.log("t1");
+    
+    var itemToRemove = document.getElementById(`listItem${counter-1}`);
+    itemToRemove.parentNode.removeChild(itemToRemove);
+    console.log("t2");
+    // itemToRemove.innerHTML = "";
+    console.log("t3");
+    counter-=1;
+    console.log("t4");
 
 };
 
