@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     createControlSpace();
     const addToList = document.querySelector('#indexBodyForm');
     addToList.addEventListener('submit', addAListItems);
+    const erase = document.getElementById(`clearList1`);
+    erase.addEventListener('click', clearlistMethod1);
+
 });
 
 let aForm;
@@ -95,18 +98,9 @@ const createControlSpace = function () {
 
     const ClarListButton1 = document.createElement('button');
     ClarListButton1.id = "clearList1";
-    ClarListButton1.innerHTML = "Erase1";
+    ClarListButton1.innerHTML = "Erase List";
     controlAllocator.appendChild(ClarListButton1);
 
-    const ClarListButton2 = document.createElement('button');
-    ClarListButton2.id = "clearList2";
-    ClarListButton2.innerHTML = "Erase2";
-    controlAllocator.appendChild(ClarListButton2);
-
-    const ClarListButton3 = document.createElement('button');
-    ClarListButton3.id = "clearList3";
-    ClarListButton3.innerHTML = "Erase3";
-    controlAllocator.appendChild(ClarListButton3);
 
     const DemoButton = document.createElement('button');
     DemoButton.id = "demoButton";
@@ -183,9 +177,15 @@ const addFavouriteFood = function (event) {  // !! WORKS
 const clearInputOptions = function () {
     document.getElementById('enteredName').value = "";
     document.getElementById('enteredEmail').value = "";
+    document.getElementById('enteredFood').value = "";
 }
 
 
 
+const clearlistMethod1 = function(event) {
+    console.log("ups")
+    const list = document.querySelector('#UnorderedList');
+    list.innerHTML = "";  /// NEW
 
+};
 
