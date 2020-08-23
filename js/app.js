@@ -13,6 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const undo = document.getElementById(`undoLast`);
     undo.addEventListener('click', removeLastListItem);
+    
+    const demoadd = document.getElementById(`demoButton`);
+    demoadd.addEventListener('click', demo);
+
+
 
 });
 
@@ -121,25 +126,25 @@ let counter = 0;
 
 
 var listObject = {
-    name:"",
-    email:"",
-    food:""
+    name: "",
+    email: "",
+    food: ""
 };
 
-const addAListItems = function (event,object) {
+const addAListItems = function (event, object) {
     object = listObject;
-    addNameToList(event,object.name);
-    console.log("adding name finished")
+    addNameToList(event, object.name);
+    // console.log("adding name finished")
     // addEmailToList(event,"WHY ARENT YoU WORKING?");
-    addEmailToList(event,object.email);
-    addFavouriteFood(event);
+    addEmailToList(event, object.email);
+    addFavouriteFood(event, object.food);
     clearInputOptions();
     counter += 1;
 
 };
 
 const addNameToList = function (event, name) {
-// const addNameToList = function (event) {
+    // const addNameToList = function (event) {
     event.preventDefault(); // ! PREVENTS page refreshing on executing event.
     console.log("trying to add name fields to list") //* TO REMOVE
     const list = document.querySelector('ul');
@@ -148,10 +153,10 @@ const addNameToList = function (event, name) {
     newListItem.id = `listItem${counter}`;
     const nameDiv = document.createElement('div');
     const nameTitle = document.createTextNode("Name: ");
-    
+
     const nameTyped = document.createTextNode('h1');
     if (name === "") {
-        
+
         nameTyped.textContent = event.target.enteredName.value;
     }
     else {
@@ -166,11 +171,11 @@ const addNameToList = function (event, name) {
     newListItem.appendChild(nameDiv);
 
     list.appendChild(newListItem);
-    
+
 };
 
 const addEmailToList = function (event, email) {  // !! WORKS
-// const addEmailToList = function (event) {  // !! WORKS
+    // const addEmailToList = function (event) {  // !! WORKS
     console.log("trying to add email fields to list")   //* TO REMOVE
     event.preventDefault();
 
@@ -198,21 +203,21 @@ const addEmailToList = function (event, email) {  // !! WORKS
 };
 
 // const addFavouriteFood = function (event, food) {  // !! WORKS
-const addFavouriteFood = function (event) {  // !! WORKS
+const addFavouriteFood = function (event,food) {  // !! WORKS
 
     const currentListElement = document.getElementById(`listItem${counter}`);
     const divForFood = document.createElement('div');
     const FoodTitle = document.createTextNode("Favourite Food: ");
     const FoodTyped = document.createTextNode('h1');
 
-    // if (food === "") {
-    //     FoodTyped.textContent = event.target.enteredFood.value;
-    // }
-    // else {
-    //     FoodTyped.textContent = food;
-    // }
+    if (food === "") {
+        FoodTyped.textContent = event.target.enteredFood.value;
+    }
+    else {
+        FoodTyped.textContent = food;
+    }
 
-    FoodTyped.textContent = event.target.enteredFood.value;
+    // FoodTyped.textContent = event.target.enteredFood.value;
 
     divForFood.appendChild(FoodTitle);
     divForFood.appendChild(FoodTyped);
@@ -258,15 +263,15 @@ const generateEmail = function (name, dish, number, domain) {
 // var listObject = {
 //     name: "",
 //     email: "",
-//     food: ""
-// };
+//     food: ""`
+// };`
 
-const demo = function () {
+const demo = function (event) {
     const nameList = ["Marek", "Duncan", "Ben", "Tim", "Jonny", "Lucy", "Vishal", "Callum", "Ally", "Jennifer", "Jarrod", "Katie"];
-
+    // console.log(nameList.length, "names list length")
     const usedNames = [];
 
-    const foodList = ["Pizza", "Ramen", "Haggis", "Fish", "Spaghetti", "Burger", "Curry", "Sandwich", "Salad", "Chilli", "Ribs", "Pinaple", "Watermelon", "Cheddar", "Pie", "Sushi", "Wine", "Beer", "Whskey", "Gin", "Cider"]
+    const foodList = ["Pizza", "Ramen", "Haggis", "Fish", "Spaghetti", "Burger", "Curry", "Sandwich", "Salad", "Chilli", "Ribs", "Pinaple", "Watermelon", "Cheddar", "Pie", "Sushi", "Wine", "Beer", "Whskey", "Gin", "Cider"];
     const usedFood = [];
 
     const number = Math.floor(Math.random() * 100);
@@ -277,18 +282,38 @@ const demo = function () {
 
     randNameIndex = Math.floor(Math.random() * nameList.length);
     chosenName = nameList[randNameIndex];
-    usedNames.append(nameList.splice(randNameIndex, 1))
+    usedNames.push(nameList.splice(randNameIndex, 1))
 
-    randFoodIndex = Math.floor(Math.random() * foodList.length());
+    randFoodIndex = Math.floor(Math.random() * foodList.length);
     chosenFood = foodList[randFoodIndex];
-    usedFood.append(foodList.splice(randFoodIndex, 1));
+    usedFood.push(foodList.splice(randFoodIndex, 1));
 
-    randDomainIndex = Math.floor(Math.random() * domains.length());
+    randDomainIndex = Math.floor(Math.random() * domains.length);
     chosenDomain = domains[randDomainIndex];
-    usedDomains.append(domains.splice(randDomainIndex, 1));
+    usedDomains.push(domains.splice(randDomainIndex, 1));
 
     theEmail = generateEmail(chosenName, chosenFood, number, chosenDomain)
-
-
+    console.log("the email:", theEmail)
+    console.log("the food", chosenFood)
     
+    // demoPerson = {
+    //     name: `${chosenName}`,
+    //     food: `${chosenFood}`,
+    //     email: `${theEmail}`
+    // }
+    console.log("the name", chosenName)
+    listObject.name = `${chosenName}`;
+    console.log("the email", theEmail)
+    listObject.email = `${theEmail}`;
+    console.log("the food", chosenFood)
+    listObject.food = `${chosenFood}`;
+    console.log(listObject);
+
+
+    addAListItems(event);
+
+    listObject.name = "";
+    listObject.email = "";
+    listObject.food = "";
+
 };
