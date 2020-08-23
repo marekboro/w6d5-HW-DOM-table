@@ -120,45 +120,33 @@ const createControlSpace = function () { // !! CONTROL SPACE BUTTON CREATION
 let counter = 0;
 
 
-var listObject = {
-    name:"",
-    email:"",
-    food:""
-};
 
-const addAListItems = function (event,object) {
-    object = listObject;
-    addNameToList(event,object.name);
-    console.log("adding name finished")
-    // addEmailToList(event,"WHY ARENT YoU WORKING?");
-    addEmailToList(event,object.email);
+
+const addAListItems = function (event) {
+    addNameToList(event,name);
+    addEmailToList(event);
     addFavouriteFood(event);
     clearInputOptions();
     counter += 1;
 
 };
 
-const addNameToList = function (event, name) {
-// const addNameToList = function (event) {
+const addNameToList = function (event,name) {
     event.preventDefault(); // ! PREVENTS page refreshing on executing event.
-    console.log("trying to add name fields to list") //* TO REMOVE
+    console.log("trying to add naem fields to list") //* TO REMOVE
     const list = document.querySelector('ul');
 
     const newListItem = document.createElement("li");
     newListItem.id = `listItem${counter}`;
     const nameDiv = document.createElement('div');
     const nameTitle = document.createTextNode("Name: ");
-    
+
     const nameTyped = document.createTextNode('h1');
-    if (name === "") {
-        
-        nameTyped.textContent = event.target.enteredName.value;
-    }
+    if (name === ""){
+        nameTyped.textContent = event.target.enteredName.value;}
     else {
         nameTyped.textContent = name;
     };
-
-    // nameTyped.textContent = event.target.enteredName.value;
 
     nameDiv.appendChild(nameTitle);
     nameDiv.appendChild(nameTyped);
@@ -166,66 +154,53 @@ const addNameToList = function (event, name) {
     newListItem.appendChild(nameDiv);
 
     list.appendChild(newListItem);
-    
-};
+}
 
-const addEmailToList = function (event, email) {  // !! WORKS
-// const addEmailToList = function (event) {  // !! WORKS
-    console.log("trying to add email fields to list")   //* TO REMOVE
-    event.preventDefault();
+const addEmailToList = function (event,email) {  // !! WORKS
+    // console.log("trying to add email fields to list")   //* TO REMOVE
 
     const currentListElement = document.getElementById(`listItem${counter}`);
     const divForEmail = document.createElement('div');
     const emailTitle = document.createTextNode("Email: ");
     const emailTyped = document.createTextNode('h1');
-    console.log("before IF"); //! TO REMOVE
-    if (email === "") {
-        console.log("inside IF"); //! TO REMOVE
-        emailTyped.textContent = event.target.enteredEmail.value;
-        console.log("entered email:", event.target.enteredEmail.value);
-
-    }
+    if(email === ""){
+    emailTyped.textContent = event.target.enteredEmail.value;}
     else {
-        console.log("email:", email); //! TO REMOVE
         emailTyped.textContent = email;
     };
-    // emailTyped.textContent = event.target.enteredEmail.value;
+
 
     divForEmail.appendChild(emailTitle);
     divForEmail.appendChild(emailTyped);
     currentListElement.appendChild(divForEmail);
-    console.log("email add end"); //! TO REMOVE
-};
 
-// const addFavouriteFood = function (event, food) {  // !! WORKS
-const addFavouriteFood = function (event) {  // !! WORKS
+}
+
+const addFavouriteFood = function (event,food) {  // !! WORKS
 
     const currentListElement = document.getElementById(`listItem${counter}`);
     const divForFood = document.createElement('div');
     const FoodTitle = document.createTextNode("Favourite Food: ");
     const FoodTyped = document.createTextNode('h1');
-
-    // if (food === "") {
-    //     FoodTyped.textContent = event.target.enteredFood.value;
-    // }
-    // else {
-    //     FoodTyped.textContent = food;
-    // }
-
-    FoodTyped.textContent = event.target.enteredFood.value;
+    
+    if (food === ""){
+    FoodTyped.textContent = event.target.enteredFood.value; }
+    else {
+        FoodTyped.textContent = food;
+    }
 
     divForFood.appendChild(FoodTitle);
     divForFood.appendChild(FoodTyped);
     currentListElement.appendChild(divForFood);
 
-};
+}
 
 
 const clearInputOptions = function () {
     document.getElementById('enteredName').value = "";
     document.getElementById('enteredEmail').value = "";
     document.getElementById('enteredFood').value = "";
-};
+}
 
 
 
@@ -250,45 +225,47 @@ const removeLastListItem = function () {
 
 };
 
-const generateEmail = function (name, dish, number, domain) {
-    return `${dish}${name}${number}@${domain}.com`
-};
-
-
-// var listObject = {
-//     name: "",
-//     email: "",
-//     food: ""
+// const generateEmail = function (name, dish, number,domain) {
+//     return `${dish}${name}${number}@${domain}.com`
 // };
+
+
+var listObject = {
+    name: "",
+    email: "",
+    food: ""
+};
 
 const demo = function () {
     const nameList = ["Marek", "Duncan", "Ben", "Tim", "Jonny", "Lucy", "Vishal", "Callum", "Ally", "Jennifer", "Jarrod", "Katie"];
-
+    
     const usedNames = [];
 
     const foodList = ["Pizza", "Ramen", "Haggis", "Fish", "Spaghetti", "Burger", "Curry", "Sandwich", "Salad", "Chilli", "Ribs", "Pinaple", "Watermelon", "Cheddar", "Pie", "Sushi", "Wine", "Beer", "Whskey", "Gin", "Cider"]
-    const usedFood = [];
+    const usedFood =[];
 
-    const number = Math.floor(Math.random() * 100);
-
-    const domains = ["googlies", "yeeehaaw", "coldmail", "owl", "mnms"];
+    const number = Math.floor(Math.random()*100);
+    
+    const domains = ["googlies","yeeehaaw","coldmail","owl","mnms"];
 
     const usedDomains = [];
 
-    randNameIndex = Math.floor(Math.random() * nameList.length);
+    randNameIndex =  Math.floor(Math.random()*nameList.length);
     chosenName = nameList[randNameIndex];
-    usedNames.append(nameList.splice(randNameIndex, 1))
+    usedNames.append(nameList.splice(randNameIndex,1))
 
-    randFoodIndex = Math.floor(Math.random() * foodList.length());
-    chosenFood = foodList[randFoodIndex];
-    usedFood.append(foodList.splice(randFoodIndex, 1));
+    // randFoodIndex = Math.floor(Math.random()*foodList.length());
+    // chosenFood=foodList[randFoodIndex];
+    // usedFood.append(foodList.splice(randFoodIndex,1));
 
-    randDomainIndex = Math.floor(Math.random() * domains.length());
-    chosenDomain = domains[randDomainIndex];
-    usedDomains.append(domains.splice(randDomainIndex, 1));
+    // randDomainIndex = Math.floor(Math.random()*domains.length());
+    // chosenDomain = domains[randDomainIndex];
+    // usedDomains.append(domains.splice(randDomainIndex,1));
 
-    theEmail = generateEmail(chosenName, chosenFood, number, chosenDomain)
+    // theEmail = generateEmail(chosenName,chosenFood,number,chosenDomain)
 
-
-    
-};
+//     addNameToList(event,name);
+//     addEmailToList(event,);
+//     addFavouriteFood(event,);
+//     clearInputOptions();
+// }
